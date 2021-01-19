@@ -13,7 +13,6 @@ const { PORT, DB_URL } = require('./config');
 const app = express();
 
 app.use(helmet());
-app.use(limiter);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -25,6 +24,7 @@ mongoose.connect(DB_URL, {
 });
 
 app.use(requestLogger);
+app.use(limiter);
 
 app.use('/', router);
 
