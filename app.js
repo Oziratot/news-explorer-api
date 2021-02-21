@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const helmet = require('helmet');
 const bodyParser = require('body-parser');
 const { errors } = require('celebrate');
+const cors = require('cors');
 const errorsHandler = require('./middlewares/errorsHandler');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const router = require('./routes/index');
@@ -11,6 +12,7 @@ const { limiter } = require('./middlewares/limiter');
 const { PORT, DB_URL } = require('./config');
 
 const app = express();
+app.use(cors({ origin: true }));
 
 app.use(helmet());
 

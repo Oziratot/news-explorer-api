@@ -4,7 +4,7 @@ const ForbiddenError = require('../errors/forbidden-err');
 const { articleNotFound, removingForbidden } = require('../utils/constants');
 
 module.exports.getArticles = (req, res, next) => {
-  Article.find({})
+  Article.find({ owner: req.user._id })
     .then((articles) => res.send(articles))
     .catch(next);
 };
@@ -27,7 +27,7 @@ module.exports.deleteArticle = (req, res, next) => {
     })
     .then((article) => {
       if (article.owner.toString() === req.user._id) {
-        Article.findOneAndRemove(req.params.articleId)
+        Article.findByIdAndRemove(req.params.articleId)
           .then((removedArticle) => {
             res.send(removedArticle);
           });

@@ -13,7 +13,7 @@ articles.post('/', celebrate({
 
 articles.delete('/:articleId', celebrate({
   params: Joi.object().keys({
-    articleId: Joi.string().required().alphanum().length(24),
+    articleId: Joi.string().required().hex().length(24),
   }),
 }), deleteArticle);
 
